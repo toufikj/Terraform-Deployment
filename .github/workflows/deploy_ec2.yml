@@ -28,12 +28,12 @@ jobs:
       # Step 3: Initialize Terraform
       - name: Terraform Init
         run: terraform init
-        
+        working-directory: ./terraform
 
       # Step 4: Terraform Plan
       - name: Terraform Plan
         run: terraform plan -var "key_name=${{ secrets.AWS_KEY_NAME }}"
-        
+        working-directory: ./terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -41,7 +41,7 @@ jobs:
       # Step 5: Apply the Terraform plan
       - name: Terraform Apply
         run: terraform apply -var "key_name=${{ secrets.AWS_KEY_NAME }}" -auto-approve
-        
+        working-directory: ./terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
